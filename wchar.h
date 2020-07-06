@@ -33,35 +33,6 @@ typedef struct {
 /* missing functions from standard APE libraries 
 Redefined or remapped to APE library functions */
 
-extern int iswalnum(wint_t);
-extern int iswalpha(wint_t);
-extern int iswblank(wint_t);
-extern int iswcntrl(wint_t);
-extern int iswdigit(wint_t);
-extern int iswgraph(wint_t);
-extern int iswlower(wint_t);
-extern int iswprint(wint_t);
-extern int iswpunct(wint_t);
-extern int iswspace(wint_t);
-extern int iswupper(wint_t);
-extern int iswxdigit(wint_t);
-extern int towlower(wint_t);
-extern int towupper(wint_t);
-
-#define iswalnum(c) isalnum((int) c)
-#define iswalpha(c) isalpha((int) c)
-#define iswblank(c) (_ctype[(unsigned char)(c)]&_ISblank)
-#define iswcntrl(c) iscntrl((int) c)
-#define iswdigit(c) isdigit((int) c)
-#define iswgraph(c) isgraph((int) c)
-#define iswlower(c) islower((int) c)
-#define iswprint(c) isprint((int) c)
-#define iswpunct(c) ispunct((int) c)
-#define iswspace(c) isspace((int) c)
-#define iswupper(c) isupper((int) c)
-#define iswxdigit(c) isxdigit((int) c)
-#define towlower(c) tolower((int) c)
-#define towupper(c) toupper((int) c)
 
 
 /* missing functions from standard APE libraries that need libwtf.a */
@@ -136,7 +107,6 @@ int           wcswidth(const wchar_t *, size_t);
 size_t        wcsxfrm(wchar_t *restrict, const wchar_t *restrict, size_t);
 int           wctob(wint_t);
 [XSI][Option Start]
-wctype_t      wctype(const char *);
 int           wcwidth(wchar_t);
 [Option End]
 wchar_t      *wmemchr(const wchar_t *, wchar_t, size_t);
