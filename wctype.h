@@ -2,46 +2,53 @@
  * https://pubs.opengroup.org/onlinepubs/009695399/basedefs/wctype.h.html
  */
 
-#include <wchar.h> /* provides wint_t wctype_t */
+#include <wchar.h> /* provides wint_t --> Rune and wctype_t */
 
 typedef const short* const* wctrans_t;
 
 
-/* missing unctions from standard APE libraries. Redefined or remapped to APE library functions */
+/* ##############################################
+ * Missing functions from standard APE libraries. 
+ * Redefined or remapped to APE library functions 
+ * ##############################################
+ */
 
-extern int iswalnum(wint_t);
-extern int iswalpha(wint_t);
-extern int iswblank(wint_t);
-extern int iswcntrl(wint_t);
-extern int iswdigit(wint_t);
-extern int iswgraph(wint_t);
-extern int iswlower(wint_t);
-extern int iswprint(wint_t);
-extern int iswpunct(wint_t);
-extern int iswspace(wint_t);
-extern int iswupper(wint_t);
-extern int iswxdigit(wint_t);
-extern int towlower(wint_t);
-extern int towupper(wint_t);
+extern int iswalnum(Rune);
+extern int iswalpha(Rune);
+extern int iswblank(Rune);
+extern int iswcntrl(Rune);
+extern int iswdigit(Rune);
+extern int iswgraph(Rune);
+extern int iswlower(Rune);
+extern int iswprint(Rune);
+extern int iswpunct(Rune);
+extern int iswspace(Rune);
+extern int iswupper(Rune);
+extern int iswxdigit(Rune);
+extern int towlower(Rune);
+extern int towupper(Rune);
 
 #define iswalnum(c) isalnum((int) c)
-#define iswalpha(c) isalpha((int) c)
+#define iswalpha(c) isalpharune(c)
 #define iswblank(c) (_ctype[(unsigned char)(c)]&_ISblank)
 #define iswcntrl(c) iscntrl((int) c)
 #define iswdigit(c) isdigit((int) c)
 #define iswgraph(c) isgraph((int) c)
-#define iswlower(c) islower((int) c)
+#define iswlower(c) islowerrune(c)
 #define iswprint(c) isprint((int) c)
 #define iswpunct(c) ispunct((int) c)
-#define iswspace(c) isspace((int) c)
-#define iswupper(c) isupper((int) c)
+#define iswspace(c) isspacerune(c)
+#define iswupper(c) isupperrune(c)
 #define iswxdigit(c) isxdigit((int) c)
-#define towlower(c) tolower((int) c)
-#define towupper(c) toupper((int) c)
+#define towlower(c) tolowerrune(c)
+#define towupper(c) toupperrune(c)
 
 
-/* missing functions from standard APE libraries that need libwtf.a */
-
+/* ##############################################
+ * Missing functions from standard APE libraries. 
+ * Functions that need libwtf.a 
+ * ##############################################
+ */
 
 wctrans_t wctrans(const char*);
 wctype_t wctype(const char*);
