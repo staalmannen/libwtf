@@ -2,7 +2,12 @@
  * https://pubs.opengroup.org/onlinepubs/009695399/basedefs/wchar.h.html
  wide UTF --> WTF */
 
+#ifndef _WCHAR_H
+#define _WCHAR_H 1
+
 #pragma lib "/$M/lib/ape/libwtf.a"
+
+#define _REENTRANT_SOURCE 1
 
 /* we want to map wchars to Runes and rune functions if possible */
 #include <utf.h>
@@ -49,6 +54,8 @@ extern int wctob(Rune);
 #define wctob(c) ((int) c)
 
 /* utf.h */
+/* some function redefintions below might
+ * benefit from the rune variant? */
 
 /* stdio.h */
 extern Rune fgetwc(FILE *);
@@ -93,6 +100,10 @@ extern int wscanf(const wchar_t *, ...);
 #define wscanf(c, ...) scanf((const char *) c, ...)
 
 /* stdlib.h */
+extern double wcstod(const wchar_t *, wchar_t **);
+#define wcstod(c1, c2) strtod((const char *) c1, (char **) c2)
+extern double wcstof(const wchar_t *, wchar_t **);
+#define wcstof(c1, c2) strtod((const char *) c1, (char **) c2)
 extern long wcstol(const wchar_t *, wchar_t **, int);
 #define wcstol(c1, c2, i) strtol((const char *) c1, (char **) c2, i)
 extern long double wcstold(const wchar_t *, wchar_t **);
@@ -105,12 +116,40 @@ extern unsigned long long wcstoull(const wchar_t *, wchar_t **, int);
 #define wcstoull(c1, c2, i) strtoull((const char *) c1, (char **) c2, i)
 
 /* string.h */
+extern wchar_t wcscat(wchar_t *. const wchar_t *);
+#define wcscat(c1, c2) strcat((char *) c1, (const char *) c2)
+extern wchar_t *wcschr(const wchar_t *, wchar_t);
+#define wcschr(c1, c2) strchr((const char *) c1, (int) c2)
+extern int wcscmp(const wchar_t *, const wchar_t *);
+#define wcscmp(c1, c2) strcmp((const char *) c1, (const char *) c2)
+extern int wcscoll(const wchar_t *, const wchar_t *);
+#define wcscoll(c1, c2) strcoll((const char *) c1, (const char *) c2)
+extern size_t wcscspn(const wchar_t *, const wchar_t *);
+#define wcscspn(c1, c2) strcspn((const char *) c1, (const char *) c2)
 extern wchar_t wcscpy(whcar_t *, const whcar_t *);
 #define wcscpy(dest,src) strcpy((char *) dest, (const char *) src)
-extern wchar_t wcscat(wchar_t *. const wchar_t *);
-#define wcscat(dest, src) strcat((char *) dest, (const char *) src)
 extern size_t wcslen(const wchar_t *);
 #define wcslen(s) strlen((const char *) s)
+extern wchar_t *wcsncat(wchar_t *, const wchar_t *, size_t);
+#define wcsncat(c1, c2, st) strncat((char *) c1, (const char *) c2, st)
+extern int wcsncmp(const wchar_t *, const wchar_t *, size_t);
+#define wcsncmp(c1, c2, st) strncmp((const char *) c1, (const char *) c2, st)
+extern wchar_t *wcsncpy(wchar_t *, const wchar_t *, size_t);
+#define wcsncpy(c1, c2, st) strncpy((char *) c1, (const char *) c2, st)
+extern wchar_t *wcspbrk(const wchar_t *, const wchar_t *);
+#define wcspbrk(c1, c2) strpbrk((const char *) c1, (const char *) c2)
+extern wchar_t *wcsrchr(const wchar_t *, wchar_t);
+#define wcsrchr(c1, c2) strrchr((const char *) c1, (int) c2)
+extern size_t wcsspn(const wchar_t *, const wchar_t *);
+#define wcsspn(c1,c2) strspn((const char *) c1, (const char *) c2)
+extern wchar_t *wcsstr(const wchar_t *, const wchar_t *);
+#define wcsstr(c1, c2) strstr((const char *) c1, (const char *) c2)
+extern wchar_t *wcstok(wchar_t *, const wchar_t *, wchar_t **);
+#define wcstok(c1, c2, c3) strtok_r((char *) c1, (const char *) c2, (char **) c3)
+extern wchar_t *wcswcs(const wchar_t *, const wchar_t *);
+#define wcswcs(c1, c2) strstr((const char *) c1, (const char *) c2)
+extern size_t wcsxfrm(wchar_t *, const wchar_t *, size_t);
+#define wcsxfrm(c1, c2, st) strxfrm((char *) c1, (const char *) c2, st)
 extern wchar_t *wmemchr(const wchar_t *, wchar_t, size_t);
 #define wmemchr(c1, c2, st) memchr((const void*) c1, (int) c2, st)
 extern int wmemcmp(const wchar_t *, const wchar_t *, size_t);
@@ -122,59 +161,28 @@ extern wchar_t *wmemmove(wchar_t *, const wchar_t *, size_t);
 extern wchar_t *wmemset(wchar_t *, wchar_t, size_t);
 #define wmemset(c1, c2, st) memset((void *) c1, (int) c2, st)
 
+/* time.h */
+extern size_t wcsftime(wchar_t *, size_t, const wchar_t *, const struct tm *);
+#define wcsftime(c1, st, c2, stm) strftime((char *) c1, st, (const char *) c2, stm)
+
 /* ##############################################
  * Missing functions from standard APE libraries. 
  * Functions that need libwtf.a 
  * ##############################################
  */
 
+int fwide(FILE *, int);
+size_t mbrlen(const char *, size_t, mbstate_t *);
+size_t mbrtowc(wchar_t *, const char *, size_t, mbstate_t *);
+int mbsinit(const mbstate_t *);
+size_t mbsrtowcs(wchar_t *, const char **, size_t, mbstate_t *);
+size_t wcrtomb(char *, wchar_t, mbstate_t *);
+size_t wcsrtombs(char *, const wchar_t **, size_t, mbstate_t *);
+int wcwidth(wchar_t);
+int wcswidth(const wchar_t *, size_t);
 int vswscanf(const wchar_t *, const wchar_t *, va_list);
 int vwscanf(const wchar_t *, va_list);
 
-int wcwidth(wchar_t);
-int wcswidth(const wchar_t *, size_t);
 
-/*
- * stuff copied from opengroup, TODO
- * 
-  
-int           fwide(FILE *, int);
 
-size_t        mbrlen(const char *restrict, size_t, mbstate_t *restrict);
-size_t        mbrtowc(wchar_t *restrict, const char *restrict, size_t,
-                  mbstate_t *restrict);
-int           mbsinit(const mbstate_t *);
-size_t        mbsrtowcs(wchar_t *restrict, const char **restrict, size_t,
-                  mbstate_t *restrict);
-   
-size_t        wcrtomb(char *restrict, wchar_t, mbstate_t *restrict);
-wchar_t      *wcscat(wchar_t *restrict, const wchar_t *restrict);
-wchar_t      *wcschr(const wchar_t *, wchar_t);
-int           wcscmp(const wchar_t *, const wchar_t *);
-int           wcscoll(const wchar_t *, const wchar_t *);
-
-size_t        wcscspn(const wchar_t *, const wchar_t *);
-size_t        wcsftime(wchar_t *restrict, size_t,
-                  const wchar_t *restrict, const struct tm *restrict);
-
-wchar_t      *wcsncat(wchar_t *restrict, const wchar_t *restrict, size_t);
-int           wcsncmp(const wchar_t *, const wchar_t *, size_t);
-wchar_t      *wcsncpy(wchar_t *restrict, const wchar_t *restrict, size_t);
-wchar_t      *wcspbrk(const wchar_t *, const wchar_t *);
-wchar_t      *wcsrchr(const wchar_t *, wchar_t);
-size_t        wcsrtombs(char *restrict, const wchar_t **restrict,
-                  size_t, mbstate_t *restrict);
-size_t        wcsspn(const wchar_t *, const wchar_t *);
-wchar_t      *wcsstr(const wchar_t *restrict, const wchar_t *restrict);
-double        wcstod(const wchar_t *restrict, wchar_t **restrict);
-float         wcstof(const wchar_t *restrict, wchar_t **restrict);
-wchar_t      *wcstok(wchar_t *restrict, const wchar_t *restrict,
-                  wchar_t **restrict);
-
-[XSI][Option Start]
-wchar_t      *wcswcs(const wchar_t *, const wchar_t *);
-
-[Option End]
-size_t        wcsxfrm(wchar_t *restrict, const wchar_t *restrict, size_t);
-
-*/
+#endif /* WCHAR_H */

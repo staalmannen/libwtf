@@ -2,6 +2,9 @@
  * https://pubs.opengroup.org/onlinepubs/009695399/basedefs/wctype.h.html
  */
 
+#ifndef _WCTYPE_H
+#define _WCTYPE_H 1
+
 #include <wchar.h> /* provides wint_t --> Rune and wctype_t */
 
 typedef const short* const* wctrans_t;
@@ -50,6 +53,9 @@ extern int towupper(Rune);
  * ##############################################
  */
 
+Rune towctrans(Rune, wctrans_t);
 wctrans_t wctrans(const char*);
 wctype_t wctype(const char*);
+int iswctype(Rune, wctrans_t);
 
+#endif /* _WCTYPE_H */

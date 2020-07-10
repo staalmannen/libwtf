@@ -1,0 +1,7 @@
+
+Most of the source files included here are copied from musl libc and are MIT licensed.
+Some source files (wctype.c, wcwidth.c) have been taken from Heirloom libwchar, also under a 
+permissive license which is present in the source code files as a comment.
+
+The code found here has been adapted to be built as a library for Plan9 APE and 
+may no longer be similar to the original code.
