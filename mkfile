@@ -1,9 +1,10 @@
 </$objtype/mkfile
 LIB=/$objtype/lib/ape/libwtf.a
 
-OFILES= fwide.$O  mbrlen.$O  mbrtowc.$O  mbsinit.$O  mbsrtowcs.$O\  
-	vswscanf.$O  vwscanf.$O  wcrtomb.$O  wcsrtombs.$O  wcswidth.$O  wctrans.$O\  
-	wctype.$O  wcwidth.$O
+OFILES= fwide.$O mbrlen.$O mbrtowc.$O mbsinit.$O mbsrtowcs.$O\  
+	vswscanf.$O vwscanf.$O wcrtomb.$O wcsrtombs.$O wcswidth.$O wctrans.$O\  
+	wctype.$O wcwidth.$O
+
 
 HFILES=\
 	/sys/include/ape/wchar.h\

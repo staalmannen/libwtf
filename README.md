@@ -1,5 +1,5 @@
 # libwtf
 A wchar implementation for APE using libutf
 
-Wide UTF --> WTF
+Wide char & UTF --> WTF
 
