@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "internal.h"
+#define EILSEQ ERANGE
 
 size_t mbsrtowcs(wchar_t * ws, const char ** src, size_t wn, mbstate_t * st)
 {

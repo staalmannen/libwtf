@@ -29,7 +29,7 @@
  */
 
 #define wint_t Rune
-typefef unsigned long wctype_t;
+typedef unsigned long wctype_t;
 
 typedef struct {
 	unsigned int count;
@@ -66,8 +66,6 @@ extern wchar_t *fgetws(wchar_t *, int, FILE *);
 #define fgetws(c, i, f) fgets((char *) c, i, f)
 extern int fputws(const wchar_t *, FILE *);
 #define fputws(c, f) fputs((const char *) c, f)
-extern int fwscanf(FILE *, const wchar_t *, ...);
-#define fwscanf(f, c, ...) fscanf(f, (const char *) c, ...)
 extern int fwprintf(FILE *, const wchar_t *, ...);
 #define fwprintf(f, c, ...) fprintf(f, (const char *) c, ...)
 extern int fwscanf(FILE *, const wchar_t *, ...);
@@ -116,7 +114,7 @@ extern unsigned long long wcstoull(const wchar_t *, wchar_t **, int);
 #define wcstoull(c1, c2, i) strtoull((const char *) c1, (char **) c2, i)
 
 /* string.h */
-extern wchar_t wcscat(wchar_t *. const wchar_t *);
+extern wchar_t wcscat(wchar_t *, const wchar_t *);
 #define wcscat(c1, c2) strcat((char *) c1, (const char *) c2)
 extern wchar_t *wcschr(const wchar_t *, wchar_t);
 #define wcschr(c1, c2) strchr((const char *) c1, (int) c2)
@@ -126,7 +124,7 @@ extern int wcscoll(const wchar_t *, const wchar_t *);
 #define wcscoll(c1, c2) strcoll((const char *) c1, (const char *) c2)
 extern size_t wcscspn(const wchar_t *, const wchar_t *);
 #define wcscspn(c1, c2) strcspn((const char *) c1, (const char *) c2)
-extern wchar_t wcscpy(whcar_t *, const whcar_t *);
+extern wchar_t wcscpy(wchar_t *, const wchar_t *);
 #define wcscpy(dest,src) strcpy((char *) dest, (const char *) src)
 extern size_t wcslen(const wchar_t *);
 #define wcslen(s) strlen((const char *) s)
