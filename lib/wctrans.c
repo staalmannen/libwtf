@@ -15,12 +15,12 @@ Rune towctrans(Rune wc, wctrans_t trans)
 	return wc;
 }
 
-wctrans_t __wctrans_l(const char *s, locale_t l)
+wctrans_t __wctrans_l(const char *s, int l)
 {
 	return wctrans(s);
 }
 
-Rune __towctrans_l(Rune c, wctrans_t t, locale_t l)
+Rune __towctrans_l(Rune c, wctrans_t t, int l)
 {
 	return towctrans(c, t);
 }

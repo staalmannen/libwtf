@@ -56,6 +56,6 @@ extern int towupper(Rune);
 Rune towctrans(Rune, wctrans_t);
 wctrans_t wctrans(const char*);
 wctype_t wctype(const char*);
-int iswctype(Rune, wctrans_t);
+int iswctype(Rune, unsigned long);
 
 #endif /* _WCTYPE_H */
