@@ -7,8 +7,6 @@ OFILES=\
 	mbrtowc.$O\
 	mbsinit.$O\
 	mbsrtowcs.$O\
-	vswscanf.$O\
-	vwscanf.$O\
 	wcrtomb.$O\
 	wcsrtombs.$O\
 	wcswidth.$O\

@@ -29,7 +29,7 @@
  */
 
 #define wint_t Rune
-typedef unsigned long wctype_t;
+#define wctype_t unsigned long
 
 typedef struct {
 	unsigned int count;
@@ -90,8 +90,12 @@ extern int vfwscanf(FILE *, const wchar_t *, va_list);
 #define vfwscanf(f, c, a) vfscanf(f, (const char *) c, a)
 extern int vwprintf(const wchar_t *, va_list);
 #define vwprintf(c, a) vprintf((const char *) c, a)
+extern int vwscanf(const wchar_t *, va_list);
+#define vwscanf(c, a) scanf((const char *) c, ...)
 extern int vswprintf(wchar_t *, size_t, const wchar_t *, va_list);
 #define vswprintf(c1, st, c2, a) vsprintf((char *) c1, (const char *) c2, a)
+extern int vswscanf(const wchar_t *, const wchar_t *, va_list);
+#define vswscanf(c1, c2, a) sscanf((const char *) c1, (const char *) c2, ...)
 extern int wprintf(const wchar_t *, ...);
 #define wprintf(c, ...) printf((const char *) c, ...)
 extern int wscanf(const wchar_t *, ...);
@@ -178,9 +182,6 @@ size_t wcrtomb(char *, wchar_t, mbstate_t *);
 size_t wcsrtombs(char *, const wchar_t **, size_t, mbstate_t *);
 int wcwidth(wchar_t);
 int wcswidth(const wchar_t *, size_t);
-int vswscanf(const wchar_t *, const wchar_t *, va_list);
-int vwscanf(const wchar_t *, va_list);
-
-
 
 #endif /* WCHAR_H */
+
