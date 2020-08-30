@@ -33,7 +33,7 @@ extern int towupper(Rune);
 
 #define iswalnum(c) isalnum((int) c)
 #define iswalpha(c) isalpharune(c)
-#define iswblank(c) (_ctype[(unsigned char)(c)]&_ISblank)
+#define iswblank(c) isblank((int) c)
 #define iswcntrl(c) iscntrl((int) c)
 #define iswdigit(c) isdigit((int) c)
 #define iswgraph(c) isgraph((int) c)
